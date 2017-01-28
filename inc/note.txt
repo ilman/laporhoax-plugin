@@ -1,0 +1,13 @@
+Array
+(
+    [post_title] => ASD WE2EQ
+    [post_category] => Array
+        (
+            [0] => -1
+        )
+
+    [tags_input] => adsasd, asdasdfdg, qeqew
+    [post_content] => sada a dasd
+    [post_date] => 
+    [comment_status] => open
+)
