@@ -14,22 +14,29 @@ function fep_post_has_errors($content)
 	$max_words_title = $fep_plugin_options['max_words_title'];
 	$min_words_content = $fep_plugin_options['min_words_content'];
 	$max_words_content = $fep_plugin_options['max_words_content'];
-	$min_words_bio = $fep_plugin_options['min_words_bio'];
-	$max_words_bio = $fep_plugin_options['max_words_bio'];
+	
 	$max_links = $fep_plugin_options['max_links'];
-	$max_links_bio = $fep_plugin_options['max_links_bio'];
+
 	$min_tags = $fep_plugin_options['min_tags'];
 	$max_tags = $fep_plugin_options['max_tags'];
 	$thumb_required = $fep_plugin_options['thumbnail_required'];
 	$error_string = '';
-	$format = '%s<br/>';
+	$format = '<li>%s</li>';
 
-	if (($min_words_title && empty($content['post_title'])) || ($min_words_content && empty($content['post_content'])) || ($min_tags && empty($content['post_tags']))) {
-		$error_string .= sprintf($format, $fep_messages['required_field_error']);
+	if(!isset($content['post_title']) || !$content['post_title']){
+		$error_string .= sprintf($format, __('Post title is required', 'frontend-publishing'));
+	}
+	if(!isset($content['post_excerpt']) || !$content['post_excerpt']){
+		$error_string .= sprintf($format, __('Post content is required', 'frontend-publishing'));
+	}
+	if(!isset($content['post_tags']) || !$content['post_tags']){
+		$error_string .= sprintf($format, __('Post tags is required', 'frontend-publishing'));
+	}
+	if(!isset($content['source_url']) || !$content['source_url']){
+		$error_string .= sprintf($format, __('Source URL is required', 'frontend-publishing'));
 	}
 
 	$tags_array = explode(',', $content['post_tags']);
-	$stripped_bio = strip_tags($content['about_the_author']);
 	$stripped_content = strip_tags($content['post_content']);
 
 	if (!empty($content['post_title']) && str_word_count($content['post_title']) < $min_words_title)
@@ -40,14 +47,12 @@ function fep_post_has_errors($content)
 		$error_string .= sprintf($format, $fep_messages['article_short_error']);
 	if (str_word_count($stripped_content) > $max_words_content)
 		$error_string .= sprintf($format, $fep_messages['article_long_error']);
-	if (!empty($content['about_the_author']) && $stripped_bio != -1 && str_word_count($stripped_bio) < $min_words_bio)
-		$error_string .= sprintf($format, $fep_messages['bio_short_error']);
-	if ($stripped_bio != -1 && str_word_count($stripped_bio) > $max_words_bio)
-		$error_string .= sprintf($format, $fep_messages['bio_long_error']);
-	if (substr_count($content['post_content'], '</a>') > $max_links)
-		$error_string .= sprintf($format, $fep_messages['too_many_article_links_error']);
-	if (substr_count($content['about_the_author'], '</a>') > $max_links_bio)
-		$error_string .= sprintf($format, $fep_messages['too_many_bio_links_error']);
+	
+
+	// if (substr_count($content['post_content'], '</a>') > $max_links)
+	// 	$error_string .= sprintf($format, $fep_messages['too_many_article_links_error']);
+	
+
 	if (!empty($content['post_tags']) && count($tags_array) < $min_tags)
 		$error_string .= sprintf($format, $fep_messages['too_few_tags_error']);
 	if (count($tags_array) > $max_tags)
@@ -58,7 +63,7 @@ function fep_post_has_errors($content)
 	if (str_word_count($error_string) < 2)
 		return false;
 	else
-		return $error_string;
+		return '<ul>'.$error_string.'</ul>';
 }
 
 /**
@@ -145,27 +150,39 @@ function fep_process_form_input()
 
 		if ($fep_misc['nofollow_body_links']){
 			$post_content = wp_rel_nofollow($_POST['post_content']);
+			$post_excerpt = wp_rel_nofollow($_POST['post_excerpt']);
 		}
 		else{
 			$post_content = $_POST['post_content'];
+			$post_excerpt = $_POST['post_excerpt'];
 		}
 
 		$current_post = empty($_POST['post_id']) ? null : get_post($_POST['post_id']);
 		$current_post_date = is_a($current_post, 'WP_Post') ? $current_post->post_date : '';
+
+		$tax_input = array();
+		if(isset($_POST['label'])){
+			$tax_input['label'] = $_POST['label'];
+		}
+
+		if(isset($_POST['figure'])){
+			$tax_input['figure'] = $_POST['figure'];
+		}
+
+		$meta_input = array();
+		if(isset($_POST['source_url'])){
+			$meta_input['source_url'] = $_POST['source_url'];
+		}
 
 		$new_post = array(
 			'post_title'     => sanitize_text_field($_POST['post_title']),
 			'post_category'  => array($_POST['post_category']),
 			'tags_input'     => sanitize_text_field($_POST['post_tags']),
 			'post_content'   => wp_kses_post($post_content),
+			'post_excerpt'   => wp_kses_post($post_excerpt),
 			'post_date'      => $current_post_date,
-			'tax_input'		  => array(
-				'post_tag'		  => 'jokowi, ahok',
-			),
-			'meta_input'     => array(
-				'tai' => 'kucing',
-				'babi' => 'anjing',
-			),
+			'tax_input'		  => $tax_input,
+			'meta_input'     => $meta_input,
 			'comment_status' => get_option('default_comment_status')
 		);
 

@@ -54,3 +54,10 @@ img.fep-loading-img {
 	background: none repeat scroll 0 0 #DBF9DB;
 	border: 1px solid #25A825;
 }
+
+/*----post list----*/
+
+#fep-posts{ display:table; width:100%; }
+#fep-posts .nav-tabs{ margin-bottom:20px; }
+#fep-posts .fep-fixed-td{ text-align:right; min-width:150px; }
+#fep-posts .fep-fixed-td a{ margin-left:10px; }
