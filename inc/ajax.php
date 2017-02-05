@@ -175,7 +175,7 @@ function lh_process_form_input()
 		}
 
 		$new_post = array(
-			'post_title'     => sanitize_text_field($_POST['post_title']),
+			'post_title'     => esc_sql($_POST['post_title']),
 			'post_category'  => array($_POST['post_category']),
 			'tags_input'     => sanitize_text_field($_POST['post_tags']),
 			'post_content'   => wp_kses_post($post_content),

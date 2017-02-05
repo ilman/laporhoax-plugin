@@ -98,7 +98,7 @@ if (isset($_GET['lh_id']) && isset($_GET['lh_action']) && $_GET['lh_action'] == 
 						wp_nonce_field('fepnonce_action', 'fepnonce');
 					?>	
 					
-				<!-- </div> not used there is already closing tag from wp editor -->
+				</div> <!-- not used there is already closing tag from wp editor -->
 
 				<div class="form-group">
 					<label for="fep-label"><?php _e('Kesimpulan', 'lapor-hoax'); ?></label>
