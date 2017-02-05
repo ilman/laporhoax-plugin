@@ -1,12 +1,12 @@
 <?php
 /*
-Plugin Name: Frontend Publishing
-Plugin URI: http://wpgurus.net/
+Plugin Name: Lapor Hoax
+Plugin URI: http://google.com/
 Description: Accept guest posts without giving your authors access to the admin area.
-Version: 2.4.0
-Author: Hassan Akhtar
-Author URI: http://wpgurus.net/
-Text Domain: frontend-publishing
+Version: 1.0.0
+Author: Lapor Hoax
+Author URI: http://google.com/
+Text Domain: lapor-hoax
 Domain Path: /languages
 License: GPL2
 */
@@ -14,34 +14,34 @@ License: GPL2
 /**
  * Loads the plugin's text domain for localization.
  **/
-function fep_load_plugin_textdomain()
+function lh_load_plugin_textdomain()
 {
-	load_plugin_textdomain('frontend-publishing', false, plugin_basename(dirname(__FILE__)) . '/languages');
+	load_plugin_textdomain('lapor-hoax', false, plugin_basename(dirname(__FILE__)) . '/languages');
 }
 
-add_action('plugins_loaded', 'fep_load_plugin_textdomain');
+add_action('plugins_loaded', 'lh_load_plugin_textdomain');
 
 /**
  * Starts output buffer so that auth_redirect() can work in shortcodes
  */
-function fep_start_output_buffers()
+function lh_start_output_buffers()
 {
 	ob_start();
 }
 
-add_action('init', 'fep_start_output_buffers');
+add_action('init', 'lh_start_output_buffers');
 
 /**
  * Initializes plugin options on first run
  */
-function fep_initialize_options()
+function lh_initialize_options()
 {
-	$activation_flag = get_option('fep_misc');
+	$activation_flag = get_option('lh_misc');
 
 	if ($activation_flag)
 		return;
 
-	$fep_restrictions = array(
+	$lh_restrictions = array(
 		'min_words_title'    => 2,
 		'max_words_title'    => 12,
 		'min_words_content'  => 250,
@@ -55,13 +55,13 @@ function fep_initialize_options()
 		'thumbnail_required' => false
 	);
 
-	$fep_roles = array(
+	$lh_roles = array(
 		'no_check'          => false,
 		'instantly_publish' => false,
 		'enable_media'      => false
 	);
 
-	$fep_misc = array(
+	$lh_misc = array(
 		'before_author_bio'   => '',
 		'disable_author_bio'  => false,
 		'remove_bios'         => false,
@@ -70,51 +70,51 @@ function fep_initialize_options()
 		'posts_per_page'      => 10
 	);
 
-	update_option('fep_post_restrictions', $fep_restrictions);
-	update_option('fep_role_settings', $fep_roles);
-	update_option('fep_misc', $fep_misc);
+	update_option('lh_post_restrictions', $lh_restrictions);
+	update_option('lh_role_settings', $lh_roles);
+	update_option('lh_misc', $lh_misc);
 }
 
-register_activation_hook(__FILE__, 'fep_initialize_options');
+register_activation_hook(__FILE__, 'lh_initialize_options');
 
-function fep_messages()
+function lh_messages()
 {
-	$fep_messages = array(
-		'unsaved_changes_warning'      => __('You have unsaved changes. Proceed anyway?', 'frontend-publishing'),
-		'confirmation_message'         => __('Are you sure?', 'frontend-publishing'),
-		'media_lib_string'             => __('Choose Image', 'frontend-publishing'),
-		'required_field_error'         => __('You missed one or more required fields', 'frontend-publishing'),
-		'general_form_error'           => __('Your submission has errors. Please try again!', 'frontend-publishing'),
-		'title_short_error'            => __('The title is too short', 'frontend-publishing'),
-		'title_long_error'             => __('The title is too long', 'frontend-publishing'),
-		'article_short_error'          => __('The article is too short', 'frontend-publishing'),
-		'article_long_error'           => __('The article is too long', 'frontend-publishing'),
-		'bio_short_error'              => __('The bio is too short', 'frontend-publishing'),
-		'bio_long_error'               => __('The bio is too long', 'frontend-publishing'),
-		'too_many_article_links_error' => __('There are too many links in the article body', 'frontend-publishing'),
-		'too_many_bio_links_error'     => __('There are too many links in the bio', 'frontend-publishing'),
-		'too_few_tags_error'           => __("You haven't added the required number of tags", 'frontend-publishing'),
-		'too_many_tags_error'          => __('There are too many tags', 'frontend-publishing'),
-		'featured_image_error'         => __('You need to choose a featured image', 'frontend-publishing')
+	$lh_messages = array(
+		'unsaved_changes_warning'      => __('You have unsaved changes. Proceed anyway?', 'lapor-hoax'),
+		'confirmation_message'         => __('Are you sure?', 'lapor-hoax'),
+		'media_lib_string'             => __('Choose Image', 'lapor-hoax'),
+		'required_field_error'         => __('You missed one or more required fields', 'lapor-hoax'),
+		'general_form_error'           => __('Your submission has errors. Please try again!', 'lapor-hoax'),
+		'title_short_error'            => __('The title is too short', 'lapor-hoax'),
+		'title_long_error'             => __('The title is too long', 'lapor-hoax'),
+		'article_short_error'          => __('The article is too short', 'lapor-hoax'),
+		'article_long_error'           => __('The article is too long', 'lapor-hoax'),
+		'bio_short_error'              => __('The bio is too short', 'lapor-hoax'),
+		'bio_long_error'               => __('The bio is too long', 'lapor-hoax'),
+		'too_many_article_links_error' => __('There are too many links in the article body', 'lapor-hoax'),
+		'too_many_bio_links_error'     => __('There are too many links in the bio', 'lapor-hoax'),
+		'too_few_tags_error'           => __("You haven't added the required number of tags", 'lapor-hoax'),
+		'too_many_tags_error'          => __('There are too many tags', 'lapor-hoax'),
+		'featured_image_error'         => __('You need to choose a featured image', 'lapor-hoax')
 	);
 
-	return $fep_messages;
+	return $lh_messages;
 }
 
 /**
  * Removes plugin data before uninstalling
  */
-function fep_rollback()
+function lh_rollback()
 {
 	wp_deregister_style('fep-style');
 	wp_deregister_script('fep-script');
-	delete_option('fep_post_restrictions');
-	delete_option('fep_role_settings');
-	delete_option('fep_misc');
-	delete_option('fep_messages');
+	delete_option('lh_post_restrictions');
+	delete_option('lh_role_settings');
+	delete_option('lh_misc');
+	delete_option('lh_messages');
 }
 
-register_uninstall_hook(__FILE__, 'fep_rollback');
+register_uninstall_hook(__FILE__, 'lh_rollback');
 
 /**
  * Enqueue scripts and stylesheets
@@ -122,19 +122,19 @@ register_uninstall_hook(__FILE__, 'fep_rollback');
  * @param array $posts WordPress posts to check for the shortcode
  * @return array $posts Checked WordPress posts
  */
-function fep_register_resources()
+function lh_register_resources()
 {
 	wp_register_style('fep-style', plugins_url('static/css/style.css', __FILE__), array(), '1.0', 'all');
 	wp_register_script("fep-script", plugins_url('static/js/scripts.js', __FILE__), array('jquery'));
 	wp_localize_script('fep-script', 'fepajaxhandler', array('ajaxurl' => admin_url('admin-ajax.php')));
-	$fep_rules = get_option('fep_post_restrictions');
-	$fep_roles = get_option('fep_role_settings');
-	$fep_rules['check_required'] = (isset($fep_roles['no_check']) && $fep_roles['no_check'] && current_user_can($fep_roles['no_check'])) ? 0 : 1;
-	wp_localize_script('fep-script', 'fep_rules', $fep_rules);
-	wp_localize_script('fep-script', 'fep_messages', fep_messages());
+	$lh_rules = get_option('lh_post_restrictions');
+	$lh_roles = get_option('lh_role_settings');
+	$lh_rules['check_required'] = (isset($lh_roles['no_check']) && $lh_roles['no_check'] && current_user_can($lh_roles['no_check'])) ? 0 : 1;
+	wp_localize_script('fep-script', 'lh_rules', $lh_rules);
+	wp_localize_script('fep-script', 'lh_messages', lh_messages());
 }
 
-add_action('init', 'fep_register_resources');
+add_action('init', 'lh_register_resources');
 
 /**
  * Append post meta (author bio) to post content
@@ -142,14 +142,14 @@ add_action('init', 'fep_register_resources');
  * @param string $content post content to append the bio to
  * @return array $posts modified post content
  */
-function fep_add_author_bio($content)
+function lh_add_author_bio($content)
 {
-	$fep_misc = get_option('fep_misc');
+	$lh_misc = get_option('lh_misc');
 	global $post;
 	$ID = $post->ID;
 	$author_bio = get_post_meta($ID, 'about_the_author', true);
-	if (!$author_bio || $fep_misc['remove_bios']) return $content;
-	$before_bio = $fep_misc['before_author_bio'];
+	if (!$author_bio || $lh_misc['remove_bios']) return $content;
+	$before_bio = $lh_misc['before_author_bio'];
 	ob_start();
 	?>
 	<?= $content ?><?= $before_bio ?>
@@ -158,7 +158,7 @@ function fep_add_author_bio($content)
 	return ob_get_clean();
 }
 
-add_filter('the_content', 'fep_add_author_bio', 100);
+add_filter('the_content', 'lh_add_author_bio', 100);
 
 /**
  * Scans content for shortcode.

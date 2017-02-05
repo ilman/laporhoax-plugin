@@ -29,11 +29,11 @@ You can allow members with a certain user level to publish posts instantly. All 
 
 Add a page with the following shortcode to create a frontend submission form:
 
-[fep_submission_form]
+[lh_submission_form]
 
 Add another page with the following shortcode to create a list of user's posts:
 
-[fep_article_list]
+[lh_article_list]
 
 **Important:** DO NOT add the two codes on the same post or page
 
@@ -41,8 +41,8 @@ Add another page with the following shortcode to create a list of user's posts:
 
 1. Use the WordPress plugin installer to upload the plugin. Alternatively you can manually create a new folder called 'fepublishing' in the `/wp-content/plugins/` directory and upload all the files there.
 2. Activate the plugin from the 'Plugins' menu in WordPress
-3. To display the submission form on your website create a new post or page with shortcode [fep_submission_form] in it
-4. Similarly create a new post or page with shortcode [fep_article_list]
+3. To display the submission form on your website create a new post or page with shortcode [lh_submission_form] in it
+4. Similarly create a new post or page with shortcode [lh_article_list]
 
 == Screenshots ==
 

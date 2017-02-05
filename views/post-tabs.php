@@ -4,9 +4,9 @@ wp_enqueue_script('fep-script');
 wp_enqueue_media();
 
 $current_user = wp_get_current_user();
-$status = isset($_GET['fep_type']) ? $_GET['fep_type'] : 'publish';
-$paged = isset($_GET['fep_page']) ? $_GET['fep_page'] : 1;
-$per_page = (isset($fep_misc['posts_per_page']) && is_numeric($fep_misc['posts_per_page'])) ? $fep_misc['posts_per_page'] : 10;
+$status = isset($_GET['lh_type']) ? $_GET['lh_type'] : 'publish';
+$paged = isset($_GET['lh_page']) ? $_GET['lh_page'] : 1;
+$per_page = (isset($lh_misc['posts_per_page']) && is_numeric($lh_misc['posts_per_page'])) ? $lh_misc['posts_per_page'] : 10;
 $author_posts = new WP_Query(array('posts_per_page' => $per_page, 'paged' => $paged, 'orderby' => 'DESC', 'author' => $current_user->ID, 'post_status' => $status));
 $old_exist = ($paged * $per_page) < $author_posts->found_posts;
 $new_exist = $paged > 1;
@@ -17,10 +17,10 @@ $new_exist = $paged > 1;
 
 	<ul class="nav nav-tabs">
 		<li <?php echo ($status == 'publish') ? 'class="active"' : ''; ?>>
-			<a href="?fep_type=publish"><?php _e('Live', 'frontend-publishing'); ?></a>
+			<a href="?lh_type=publish"><?php _e('Live', 'lapor-hoax'); ?></a>
 		</li>
 		<li <?php echo ($status == 'pending') ? 'class="active"' : ''; ?>>
-			<a href="?fep_type=pending"><?php _e('Pending', 'frontend-publishing'); ?></a>
+			<a href="?lh_type=pending"><?php _e('Pending', 'lapor-hoax'); ?></a>
 		</li>
 	</ul>
 	<!-- tab header -->
@@ -30,9 +30,9 @@ $new_exist = $paged > 1;
 	<div id="fep-post-table-container">
 
 		<?php if (!$author_posts->have_posts()): ?>
-			<p><?php _e('Nothing found.', 'frontend-publishing'); ?></p>
+			<p><?php _e('Nothing found.', 'lapor-hoax'); ?></p>
 		<?php else: ?>
-			<p><?php printf(__('%s article(s).', 'frontend-publishing'), $author_posts->found_posts); ?></p>
+			<p><?php printf(__('%s article(s).', 'lapor-hoax'), $author_posts->found_posts); ?></p>
 		<?php endif; ?>
 		
 		<table class="table table-striped" width="100%">
@@ -44,12 +44,12 @@ $new_exist = $paged > 1;
 					<td><?php the_title(); ?></td>
 					<td class="fep-fixed-td">
 						<?php if ($status == 'publish'): ?>
-							<a href="<?php the_permalink(); ?>" title="<?php _e('View Post', 'frontend-publishing'); ?>"><?php _e('View', 'frontend-publishing'); ?></a>
+							<a href="<?php the_permalink(); ?>" title="<?php _e('View Post', 'lapor-hoax'); ?>"><?php _e('View', 'lapor-hoax'); ?></a>
 						<?php endif; ?>
-						<a href="?fep_action=edit&fep_id=<?= $postid; ?><?= (isset($_SERVER['QUERY_STRING']) ? '&' . $_SERVER['QUERY_STRING'] : '') ?>"><?php _e('Edit', 'frontend-publishing'); ?></a>
+						<a href="?lh_action=edit&lh_id=<?= $postid; ?><?= (isset($_SERVER['QUERY_STRING']) ? '&' . $_SERVER['QUERY_STRING'] : '') ?>"><?php _e('Edit', 'lapor-hoax'); ?></a>
 						<span class="post-delete">
 							<img id="fep-loading-img-<?= $postid ?>" class="fep-loading-img" src="<?php echo plugins_url('static/img/ajax-loading.gif', dirname(__FILE__)); ?>">
-							<a href="#"><?php _e('Delete', 'frontend-publishing'); ?></a>
+							<a href="#"><?php _e('Delete', 'lapor-hoax'); ?></a>
 							<input type="hidden" class="post-id" value="<?= $postid ?>">
 						</span>
 					</td>
@@ -61,12 +61,12 @@ $new_exist = $paged > 1;
 
 		<div class="fep-nav">
 			<?php if ($new_exist): ?>
-				<a class="fep-nav-link fep-nav-link-left" href="?fep_type=<?= $status ?>&fep_page=<?= ($paged - 1) ?>">
-					&#10094; <?php _e('Newer Posts', 'frontend-publishing'); ?></a>
+				<a class="fep-nav-link fep-nav-link-left" href="?lh_type=<?= $status ?>&lh_page=<?= ($paged - 1) ?>">
+					&#10094; <?php _e('Newer Posts', 'lapor-hoax'); ?></a>
 			<?php endif; ?>
 			<?php if ($old_exist): ?>
 				<a class="fep-nav-link fep-nav-link-right"
-				   href="?fep_type=<?= $status ?>&fep_page=<?= ($paged + 1) ?>"><?php _e('Older Posts', 'frontend-publishing'); ?>
+				   href="?lh_type=<?= $status ?>&lh_page=<?= ($paged + 1) ?>"><?php _e('Older Posts', 'lapor-hoax'); ?>
 					&#10095;</a>
 			<?php endif; ?>
 			<div style="clear:both;"></div>

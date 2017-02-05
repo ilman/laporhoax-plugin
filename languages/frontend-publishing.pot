@@ -349,7 +349,7 @@ msgstr ""
 #: inc/options-panel.php:271
 msgid ""
 "Number of posts to display at a time on the interface created with the help "
-"of [fep_article_list]"
+"of [lh_article_list]"
 msgstr ""
 
 #: inc/options-panel.php:290

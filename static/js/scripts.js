@@ -6,7 +6,7 @@ jQuery(document).ready(function ($) {
 	function confirm_exit() {
 		var mce = typeof(tinyMCE) != 'undefined' ? tinyMCE.activeEditor : false;
 		if (has_changed || (mce && !mce.isHidden() && mce.isDirty() )){
-			return fep_messages.unsaved_changes_warning;
+			return lh_messages.unsaved_changes_warning;
 		}
 	}
 
@@ -46,52 +46,52 @@ jQuery(document).ready(function ($) {
 
 	function get_post_errors(title, content, bio, category, tags, featured_image) {
 		// var error_string = '';
-		// if (fep_rules.check_required == false)
+		// if (lh_rules.check_required == false)
 		// 	return false;
 
-		// if ((fep_rules.min_words_title != 0 && title === '') || (fep_rules.min_words_content != 0 && content === '') || (fep_rules.min_words_bio != 0 && bio === '') || (fep_rules.min_tags != 0 && tags === ''))
-		// 	error_string = fep_messages.required_field_error + '<br/>';
+		// if ((lh_rules.min_words_title != 0 && title === '') || (lh_rules.min_words_content != 0 && content === '') || (lh_rules.min_words_bio != 0 && bio === '') || (lh_rules.min_tags != 0 && tags === ''))
+		// 	error_string = lh_messages.required_field_error + '<br/>';
 
 		// var stripped_content = content.replace(/(<([^>]+)>)/ig, "");
 		// var stripped_bio = bio.replace(/(<([^>]+)>)/ig, "");
 
-		// if (title != '' && str_word_count(title) < fep_rules.min_words_title)
-		// 	error_string += fep_messages.title_short_error + '<br/>';
+		// if (title != '' && str_word_count(title) < lh_rules.min_words_title)
+		// 	error_string += lh_messages.title_short_error + '<br/>';
 
-		// if (content != '' && str_word_count(title) > fep_rules.max_words_title)
-		// 	error_string += fep_messages.title_long_error + '<br/>';
+		// if (content != '' && str_word_count(title) > lh_rules.max_words_title)
+		// 	error_string += lh_messages.title_long_error + '<br/>';
 
-		// if (content != '' && str_word_count(stripped_content) < fep_rules.min_words_content)
-		// 	error_string += fep_messages.article_short_error + '<br/>';
+		// if (content != '' && str_word_count(stripped_content) < lh_rules.min_words_content)
+		// 	error_string += lh_messages.article_short_error + '<br/>';
 
-		// if (str_word_count(stripped_content) > fep_rules.max_words_content)
-		// 	error_string += fep_messages.article_long_error + '<br/>';
+		// if (str_word_count(stripped_content) > lh_rules.max_words_content)
+		// 	error_string += lh_messages.article_long_error + '<br/>';
 
-		// if (bio != -1 && bio != '' && str_word_count(stripped_bio) < fep_rules.min_words_bio)
-		// 	error_string += fep_messages.bio_short_error + '<br/>';
+		// if (bio != -1 && bio != '' && str_word_count(stripped_bio) < lh_rules.min_words_bio)
+		// 	error_string += lh_messages.bio_short_error + '<br/>';
 
-		// if (bio != -1 && str_word_count(stripped_bio) > fep_rules.max_words_bio)
-		// 	error_string += fep_messages.bio_long_error + '<br/>';
+		// if (bio != -1 && str_word_count(stripped_bio) > lh_rules.max_words_bio)
+		// 	error_string += lh_messages.bio_long_error + '<br/>';
 
-		// if (substr_count(content, '</a>') > fep_rules.max_links)
-		// 	error_string += fep_messages.too_many_article_links_error + '<br/>';
+		// if (substr_count(content, '</a>') > lh_rules.max_links)
+		// 	error_string += lh_messages.too_many_article_links_error + '<br/>';
 
-		// if (substr_count(bio, '</a>') > fep_rules.max_links_bio)
-		// 	error_string += fep_messages.too_many_bio_links_error + '<br/>';
+		// if (substr_count(bio, '</a>') > lh_rules.max_links_bio)
+		// 	error_string += lh_messages.too_many_bio_links_error + '<br/>';
 
-		// if (tags != '' && count_tags(tags) < fep_rules.min_tags)
-		// 	error_string += fep_messages.too_few_tags_error + '<br/>';
+		// if (tags != '' && count_tags(tags) < lh_rules.min_tags)
+		// 	error_string += lh_messages.too_few_tags_error + '<br/>';
 
-		// if (count_tags(tags) > fep_rules.max_tags)
-		// 	error_string += fep_messages.too_many_tags_error + '<br/>';
+		// if (count_tags(tags) > lh_rules.max_tags)
+		// 	error_string += lh_messages.too_many_tags_error + '<br/>';
 
-		// if (fep_rules.thumbnail_required && fep_rules.thumbnail_required == 'true' && featured_image == -1)
-		// 	error_string += fep_messages.featured_image_error + '<br/>';
+		// if (lh_rules.thumbnail_required && lh_rules.thumbnail_required == 'true' && featured_image == -1)
+		// 	error_string += lh_messages.featured_image_error + '<br/>';
 
 		// if (error_string == '')
 		// 	return false;
 		// else
-		// 	return '<strong>' + fep_messages.general_form_error + '</strong><br/>' + error_string;
+		// 	return '<strong>' + lh_messages.general_form_error + '</strong><br/>' + error_string;
 	}
 
 	// Delete a post
@@ -102,7 +102,7 @@ jQuery(document).ready(function ($) {
 			row = $(this).closest('.fep-row'),
 			message_box = $('#fep-message'),
 			post_count = $('.count', $('#fep-posts')),
-			confirmation = confirm(fep_messages.confirmation_message);
+			confirmation = confirm(lh_messages.confirmation_message);
 
 		if (!confirmation)
 			return;
@@ -113,7 +113,7 @@ jQuery(document).ready(function ($) {
 			type: 'POST',
 			url: fepajaxhandler.ajaxurl,
 			data: {
-				action: 'fep_delete_posts',
+				action: 'lh_delete_posts',
 				post_id: id,
 				delete_nonce: nonce
 			},
@@ -173,12 +173,12 @@ jQuery(document).ready(function ($) {
 			post_data[v.name] = v.value;
 		});
 
-		post_data['action'] = 'fep_process_form_input';
+		post_data['action'] = 'lh_process_form_input';
 		post_data['post_nonce'] = nonce;
 		post_data['post_id'] = post_id;
 
 		// {
-		// 	action: 'fep_process_form_input',
+		// 	action: 'lh_process_form_input',
 		// 	post_title: title,
 		// 	post_content: content,
 		// 	about_the_author: bio,
@@ -230,9 +230,9 @@ jQuery(document).ready(function ($) {
 	$('a#fep-featured-image-link', $('#fep-featured-image')).click(function (e) {
 		e.preventDefault();
 		custom_uploader = wp.media.frames.file_frame = wp.media({
-			title: fep_messages.media_lib_string,
+			title: lh_messages.media_lib_string,
 			button: {
-				text: fep_messages.media_lib_string
+				text: lh_messages.media_lib_string
 			},
 			multiple: false
 		});
@@ -243,7 +243,7 @@ jQuery(document).ready(function ($) {
 				type: 'POST',
 				url: fepajaxhandler.ajaxurl,
 				data: {
-					action: 'fep_fetch_featured_image',
+					action: 'lh_fetch_featured_image',
 					img: attachment.id
 				},
 				success: function (data) {
