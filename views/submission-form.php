@@ -44,20 +44,24 @@ if (isset($_GET['lh_id']) && isset($_GET['lh_action']) && $_GET['lh_action'] == 
 		<!-- Tab panes -->
 		<div class="tab-content">
 			<div role="tabpanel" class="tab-pane active" id="report">
+
+				<p>Laporkan berita yang menurut Anda diragukan kebenarannya</p>
+
+				<p class="alert alert-info">Jika Anda telah yakin/punya klarifikasi tentang berita tersebut. Mohon lengkapi laporan Anda dengan mengisi form lebih lanjut di "Tab Klarifikasi"</p>
 				
 
 				<div class="form-group">
-					<label for="fep-source-url"><?php _e('URL Berita', 'lapor-hoax'); ?></label>
+					<label for="fep-source-url"><?php _e('URL Klaim/Berita', 'lapor-hoax'); ?></label>
 					<input class="form-control" type="text" name="source_url" id="fep-source-url" value="<?php echo (isset($post['source_url'])) ? $post['source_url'] : ''; ?>">
 				</div>
 
 				<div class="form-group">
-					<label for="fep-post-title"><?php _e('Judul Berita', 'lapor-hoax'); ?></label>
-					<input class="form-control" type="text" name="post_title" id="fep-post-title" value="<?php echo ($post) ? $post['title'] : ''; ?>">
+					<label for="fep-post-title"><?php _e('Judul Klaim/Berita', 'lapor-hoax'); ?></label>
+					<input class="form-control" type="text" name="title" id="fep-post-title" value="<?php echo ($post) ? $post['title'] : ''; ?>">
 				</div>
 
 				<div class="form-group">
-					<label for="fep-post-excerpt"><?php _e('Isi Berita', 'lapor-hoax'); ?></label>
+					<label for="fep-post-excerpt"><?php _e('Isi Klaim/Berita', 'lapor-hoax'); ?></label>
 					<textarea class="form-control" name="post_excerpt" id="fep-post-excerpt" rows="6"><?php echo (isset($post['excerpt'])) ? $post['excerpt'] : ''; ?></textarea>
 				</div>
 
@@ -77,11 +81,13 @@ if (isset($_GET['lh_id']) && isset($_GET['lh_action']) && $_GET['lh_action'] == 
 				<div class="form-group">
 					<label for="fep-tags"><?php _e('Tags', 'lapor-hoax'); ?></label>
 					<input class="form-control" type="text" name="post_tags" id="fep-tags" value="<?php echo ($post) ? $post['tags'] : ''; ?>">
+					<p class="help-block">Kata kunci yang berkaitan dengan berita ini. Penulisan dipisah dengan tanda koma (,).</p>
 				</div>
 
 				<div class="form-group">
 					<label for="fep-figure"><?php _e('Tokoh Terkait', 'lapor-hoax'); ?></label>
 					<input class="form-control" type="text" name="figure" id="fep-figure" value="<?php echo (isset($post['figure'])) ? $post['figure'] : ''; ?>">
+					<p class="help-block">Nama-nama tokoh yang berkaitan dengan berita ini. Penulisan dipisah dengan tanda koma (,)</p>
 				</div>
 
 

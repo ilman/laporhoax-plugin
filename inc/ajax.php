@@ -23,7 +23,7 @@ function lh_post_has_errors($content)
 	$error_string = '';
 	$format = '<li>%s</li>';
 
-	if(!isset($content['post_title']) || !$content['post_title']){
+	if(!isset($content['title']) || !$content['title']){
 		$error_string .= sprintf($format, __('Post title is required', 'lapor-hoax'));
 	}
 	if(!isset($content['post_excerpt']) || !$content['post_excerpt']){
@@ -39,9 +39,9 @@ function lh_post_has_errors($content)
 	$tags_array = explode(',', $content['post_tags']);
 	$stripped_content = strip_tags($content['post_content']);
 
-	if (!empty($content['post_title']) && str_word_count($content['post_title']) < $min_words_title)
+	if (!empty($content['title']) && str_word_count($content['title']) < $min_words_title)
 		$error_string .= sprintf($format, $lh_messages['title_short_error']);
-	if (!empty($content['post_title']) && str_word_count($content['post_title']) > $max_words_title)
+	if (!empty($content['title']) && str_word_count($content['title']) > $max_words_title)
 		$error_string .= sprintf($format, $lh_messages['title_long_error']);
 	if (!empty($content['post_content']) && str_word_count($stripped_content) < $min_words_content)
 		$error_string .= sprintf($format, $lh_messages['article_short_error']);
@@ -144,6 +144,8 @@ function lh_process_form_input()
 			$errors = lh_post_has_errors($_POST);
 		}
 
+		// $errors = false;
+
 		if ($errors){
 			throw new Exception($errors, 1);
 		}
@@ -175,7 +177,7 @@ function lh_process_form_input()
 		}
 
 		$new_post = array(
-			'post_title'     => esc_sql($_POST['post_title']),
+			'post_title'     => wp_strip_all_tags($_POST['title']),
 			'post_category'  => array($_POST['post_category']),
 			'tags_input'     => sanitize_text_field($_POST['post_tags']),
 			'post_content'   => wp_kses_post($post_content),
