@@ -75,7 +75,7 @@ if (isset($_GET['lh_id']) && isset($_GET['lh_action']) && $_GET['lh_action'] == 
 
 				<div class="form-group">
 					<label for="fep-category"><?php _e('Kategori', 'lapor-hoax'); ?></label>
-					<?php wp_dropdown_categories(array('id' => 'fep-category', 'class'=>'form-control', 'hide_empty' => 0, 'name' => 'post_category', 'orderby' => 'name', 'selected' => $post['category'], 'hierarchical' => true, 'show_option_none' => __('None', 'lapor-hoax'))); ?>	
+					<?php wp_dropdown_categories(array('id' => 'fep-category', 'class'=>'form-control', 'hide_empty' => 0, 'name' => 'post_category', 'orderby' => 'name', 'selected' => $post['category'], 'hierarchical' => true, 'show_option_none' => __('- Select -', 'lapor-hoax'))); ?>	
 				</div>
 
 				<div class="form-group">
@@ -106,10 +106,16 @@ if (isset($_GET['lh_id']) && isset($_GET['lh_action']) && $_GET['lh_action'] == 
 					
 				</div> <!-- not used there is already closing tag from wp editor -->
 
-				<div class="form-group">
-					<label for="fep-label"><?php _e('Kesimpulan', 'lapor-hoax'); ?></label>
-					<?php wp_dropdown_categories(array('id' => 'fep-label', 'class'=>'form-control', 'hide_empty' => 0, 'name' => 'label', 'taxonomy'=>'label', 'orderby' => 'name', 'selected' => $post['label'], 'hierarchical' => true, 'show_option_none' => __('None', 'lapor-hoax'))); ?>	
-				</div>
+				<?php 
+					$parent_term = get_term_by('slug', 'verified', 'label');
+				?>
+
+				<?php if(is_object($parent_term) && isset($parent_term->term_id)): ?>
+					<div class="form-group">
+						<label for="fep-label"><?php _e('Kesimpulan', 'lapor-hoax'); ?></label>
+						<?php wp_dropdown_categories(array('id' => 'fep-label', 'class'=>'form-control', 'hide_empty' => 0, 'name' => 'label', 'taxonomy'=>'label', 'orderby' => 'name', 'selected' => $post['label'], 'hierarchical' => false, 'child_of' => $parent_term->term_id, 'show_option_none' => __('- Select -', 'lapor-hoax'))); ?>	
+					</div>
+				<?php endif; ?>
 
 			</div>
 			<!-- tab -->
