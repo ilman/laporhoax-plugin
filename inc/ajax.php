@@ -177,7 +177,7 @@ function lh_process_form_input()
 		}
 
 		$new_post = array(
-			'post_title'     => wp_strip_all_tags($_POST['title']),
+			'post_title'     => sanitize_text_field($_POST['title']),
 			'post_category'  => array($_POST['post_category']),
 			'tags_input'     => sanitize_text_field($_POST['post_tags']),
 			'post_content'   => wp_kses_post($post_content),
@@ -214,8 +214,9 @@ function lh_process_form_input()
 		// 	update_post_meta($new_post_id, 'about_the_author', $about_the_author);
 		// }
 
-		if ($_POST['featured_img'] != -1)
+		if ($_POST['featured_img'] != -1){
 			set_post_thumbnail($new_post_id, $_POST['featured_img']);
+		}
 
 		$data['success'] = true;
 		$data['post_id'] = $new_post_id;

@@ -257,4 +257,30 @@ jQuery(document).ready(function ($) {
 		});
 		custom_uploader.open();
 	});
+
+	(function(){
+		if(typeof $.fn.select2 !== 'undefined'){ }
+
+		$('.input-select2-tags').each(function(idx) {
+			var $this = $(this);
+			var min_length = $this.data('min_length');
+			var max_item = $this.data('max_item');
+
+			var config = {
+				tags: [],
+				tokenSeparators: [',']
+			};
+
+			if (typeof min_length === 'undefined') {
+				min_length = 3;
+			}
+			config.minimumInputLength = parseInt(min_length);
+
+			if (typeof max_item !== 'undefined') {
+				config.maximumSelectionSize = parseInt(max_item);
+			}
+
+			$this.select2(config);
+		});
+	})();
 });

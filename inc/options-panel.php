@@ -7,8 +7,8 @@ function lh_menu_item()
 {
 	global $lh_settings_page_hook;
 	$lh_settings_page_hook = add_menu_page(
-		__('Frontend Publishing Settings', 'lapor-hoax'),
-		__('Frontend Publishing', 'lapor-hoax'),
+		__('Lapor Hoax Settings', 'lapor-hoax'),
+		__('Lapor Hoax', 'lapor-hoax'),
 		'manage_options',
 		'lh_settings',
 		'lh_render_settings_page'
@@ -37,41 +37,17 @@ function lh_render_settings_page()
 	?>
 	<div class="wrap">
 		<div id="icon-options-general" class="icon32"></div>
-		<h2><?php _e('Frontend Publishing Settings', 'lapor-hoax'); ?></h2>
+		<h2><?php _e('Lapor Hoax Settings', 'lapor-hoax'); ?></h2>
 		<?php settings_errors(); ?>
 		<div class="clearfix paddingtop20">
-			<div class="first ninecol">
+			<!-- <div class="first ninecol"> -->
 				<form method="post" action="options.php">
 					<?php settings_fields('lh_settings'); ?>
 					<?php do_meta_boxes('lh_metaboxes', 'advanced', null); ?>
 					<?php wp_nonce_field('closedpostboxes', 'closedpostboxesnonce', false); ?>
 					<?php wp_nonce_field('meta-box-order', 'meta-box-order-nonce', false); ?>
 				</form>
-			</div>
-			<div class="last threecol">
-				<div class="side-block">
-					<?php _e("Like the plugin? Don't forget to give it a good rating on WordPress.org.", 'lapor-hoax'); ?>
-				</div>
-				<div class="side-block">
-					<h3><?php _e('Frontend Publishing Pro', 'lapor-hoax'); ?></h3>
-					<?php _e('Supports:', 'lapor-hoax'); ?>
-					<ul>
-						<li>- <?php _e('PayPal payments', 'lapor-hoax'); ?></li>
-						<li>- <?php _e('CopyScape integration', 'lapor-hoax'); ?></li>
-						<li>- <?php _e('Custom fields', 'lapor-hoax'); ?></li>
-						<li>- <?php _e('Custom post types', 'lapor-hoax'); ?></li>
-						<li>- <?php _e('Custom taxonomies', 'lapor-hoax'); ?></li>
-						<li>- <?php _e('Unlimited forms', 'lapor-hoax'); ?></li>
-						<li>- <?php _e('Drag and drop form builder', 'lapor-hoax'); ?></li>
-						<li>- <?php _e('Media restrictions', 'lapor-hoax'); ?></li>
-						<li>- <?php _e('Auto-drafts', 'lapor-hoax'); ?></li>
-						<li>- <?php _e('Anonymous posting', 'lapor-hoax'); ?></li>
-					</ul>
-					<div style="text-align:center;"><a class="button button-primary"
-													   href="http://codecanyon.net/item/lapor-hoax-pro/8517990/?ref=khaxan"><?php _e('Try It Now!', 'lapor-hoax'); ?></a>
-					</div>
-				</div>
-			</div>
+			<!-- </div> -->
 		</div>
 	</div>
 <?php }

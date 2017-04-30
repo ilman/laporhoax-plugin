@@ -19,12 +19,19 @@ function lh_add_new_post()
 					__('log in', 'lapor-hoax')
 				)
 			);
-		} else auth_redirect();
+		} 
+		else{
+			auth_redirect();
+			// wp_redirect(site_url('sample-page')); exit;
+		} 
+	}
+	else{
+		ob_start();
+		include(dirname(dirname(__FILE__)) . '/views/submission-form.php');
+		return ob_get_clean();
 	}
 
-	ob_start();
-	include(dirname(dirname(__FILE__)) . '/views/submission-form.php');
-	return ob_get_clean();
+	
 }
 
 add_shortcode('lh_submission_form', 'lh_add_new_post');
@@ -47,7 +54,10 @@ function lh_manage_posts()
 					__('log in', 'lapor-hoax')
 				)
 			);
-		} else auth_redirect();
+		} else {
+			auth_redirect();
+			// wp_redirect(site_url('sample-page')); exit;
+		}
 	}
 
 	ob_start();

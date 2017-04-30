@@ -4,8 +4,7 @@ Plugin Name: Lapor Hoax
 Plugin URI: http://google.com/
 Description: Accept guest posts without giving your authors access to the admin area.
 Version: 1.0.0
-Author: Lapor Hoax
-Author URI: http://google.com/
+Author: Ilman Maulana
 Text Domain: lapor-hoax
 Domain Path: /languages
 License: GPL2
@@ -125,7 +124,10 @@ register_uninstall_hook(__FILE__, 'lh_rollback');
 function lh_register_resources()
 {
 	wp_register_style('fep-style', plugins_url('static/css/style.css', __FILE__), array(), '1.0', 'all');
-	wp_register_script("fep-script", plugins_url('static/js/scripts.js', __FILE__), array('jquery'));
+	wp_register_style('select2', plugins_url('static/css/select2.css', __FILE__), array(), '3.5.2', 'all');
+	wp_register_style('select2-bootstrap', plugins_url('static/css/select2-bootstrap.css', __FILE__), array('select2'), '3.5.2', 'all');
+	wp_register_script('select2','https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.min.js', array('jquery'), '3.5.2');
+	wp_register_script('fep-script', plugins_url('static/js/scripts.js', __FILE__), array('jquery','select2'));
 	wp_localize_script('fep-script', 'fepajaxhandler', array('ajaxurl' => admin_url('admin-ajax.php')));
 	$lh_rules = get_option('lh_post_restrictions');
 	$lh_roles = get_option('lh_role_settings');

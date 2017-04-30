@@ -1,5 +1,8 @@
 <?php
 wp_enqueue_style('fep-style');
+wp_enqueue_style('select2');
+wp_enqueue_style('select2-bootstrap');
+wp_enqueue_script('select2');
 wp_enqueue_script('fep-script');
 wp_enqueue_media();
 
@@ -80,13 +83,13 @@ if (isset($_GET['lh_id']) && isset($_GET['lh_action']) && $_GET['lh_action'] == 
 
 				<div class="form-group">
 					<label for="fep-tags"><?php _e('Tags', 'lapor-hoax'); ?></label>
-					<input class="form-control" type="text" name="post_tags" id="fep-tags" value="<?php echo ($post) ? $post['tags'] : ''; ?>">
+					<input class="form-control input-select2-tags" type="text" name="post_tags" id="fep-tags" value="<?php echo ($post) ? $post['tags'] : ''; ?>">
 					<p class="help-block">Kata kunci yang berkaitan dengan berita ini. Penulisan dipisah dengan tanda koma (,).</p>
 				</div>
 
 				<div class="form-group">
 					<label for="fep-figure"><?php _e('Tokoh Terkait', 'lapor-hoax'); ?></label>
-					<input class="form-control" type="text" name="figure" id="fep-figure" value="<?php echo (isset($post['figure'])) ? $post['figure'] : ''; ?>">
+					<input class="form-control input-select2-tags" type="text" name="figure" id="fep-figure" value="<?php echo (isset($post['figure'])) ? $post['figure'] : ''; ?>">
 					<p class="help-block">Nama-nama tokoh yang berkaitan dengan berita ini. Penulisan dipisah dengan tanda koma (,)</p>
 				</div>
 
