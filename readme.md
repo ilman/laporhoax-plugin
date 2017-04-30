@@ -6,11 +6,11 @@ Plugin khusus untuk mengakomodir pelaporan hoax untuk website berbasis wordpress
 
 Gunakan shortcode berikut untuk menampilkan form laporhoax:
 
-[lh_submission_form]
+*[lh_submission_form]*
 
 Gunakan shortcode berikut untuk menampilkan daftar hoax yang dilaporkan user:
 
-[lh_article_list]
+*[lh_article_list]*
 
 **Penting:** Jangan menggunakan kedua shortcode diatas secara bersamaan dalam 1 page
 
